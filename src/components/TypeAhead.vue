@@ -8,6 +8,7 @@
              @keydown.up="up"
              @keydown.enter.prevent="hit"
              @keydown.esc="reset"
+             @blur="onBlur($event)"
              @input="update($event)"/>
 
       <ul v-show="hasItems" class="dropdown-menu-list dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
@@ -119,6 +120,13 @@
         type: Function,
         default: function (item) {
           this.query = item
+        }
+      },
+      onBlur: {
+        required: false,
+        type: Function,
+        default: function(event) {
+
         }
       },
 
