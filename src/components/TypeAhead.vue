@@ -8,8 +8,9 @@
              @keydown.up="up"
              @keydown.enter.prevent="hit"
              @keydown.esc="reset"
-             @blur="onBlur($event)"
-             @input="update($event)"/>
+             @blur="blur($event)"
+             @input="update($event)"
+             :required="required"/>
 
       <ul v-show="hasItems" class="dropdown-menu-list dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
         <li v-for="(item , index) in items" :class="{active:activeClass(index)}"
@@ -125,9 +126,14 @@
       onBlur: {
         required: false,
         type: Function,
-        default: function(event) {
-
+        default: function (event) {
+          
         }
+      },
+      required: {
+        required: false,
+        type: Boolean,
+        default: false
       },
 
       highlighting: {
@@ -196,6 +202,9 @@
         if (this.selectFirst) {
           this.down()
         }
+      },
+      blur (event) {
+        this.onBlur(event);
       },
       update (event) {
         this.lastTime = event.timeStamp
